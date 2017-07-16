@@ -52,9 +52,9 @@ class BOMTest(unittest.TestCase):
         bom = parts.BOM(number_of_parts=1)
         self.assertEqual(1, len(bom.components()))
 
-    # def test_bom_components_type(self):
-    #     bom = parts.BOM(number_of_parts=1)
-    #     self.assertEqual('Stuff', bom.components())
+    def test_bom_components_type(self):
+        bom = parts.BOM(number_of_parts=1)
+        self.assertEqual('Stuff', bom.components())
 
     def test_bom_components_55(self):
         bom = parts.BOM(number_of_parts=55)

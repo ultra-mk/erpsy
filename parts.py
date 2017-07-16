@@ -60,5 +60,7 @@ class BOM(Part):
     def number(self, style=None):
         return super(BOM, self).number(style)
 
+# calling init returns a nontype because Part.__init__() returns pass. Look at changing
+# the whole archetecture to use properties instead of methods.
     def components(self):
-        return [super(BOM, self).__init__() for i in range(0, self.number_of_parts)]
+        return [Part.__init__(self) for i in range(0, self.number_of_parts)]
