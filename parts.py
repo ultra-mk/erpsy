@@ -58,9 +58,12 @@ class BOM(Part):
         self.number_of_parts = number_of_parts
 
     def number(self, style=None):
-        return super(BOM, self).number(style)
+        return Part.number(self, style)
 
-# calling init returns a nontype because Part.__init__() returns pass. Look at changing
-# the whole archetecture to use properties instead of methods.
-    def components(self):
-        return [Part.__init__(self) for i in range(0, self.number_of_parts)]
+    def components(self, style=None):
+        return [Part.number(style) for i in range(0, self.number_of_parts)]
+
+    def name(self):
+        nouns = ('Gentech', 'McCoy', 'Test', 'Motor')
+        adjectives = ('Kit', 'Assy', 'Assembly')
+        return "{0} {1}".format(nouns, adjectives)

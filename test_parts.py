@@ -26,7 +26,7 @@ class PartTest(unittest.TestCase):
 
     def test_name(self):
         part = parts.Part()
-        self.assertEqual(True, isinstance(part.name(), str))
+        self.assertTrue(isinstance(part.name(), str))
 
     def test_name_len(self):
         part = parts.Part()
@@ -34,7 +34,7 @@ class PartTest(unittest.TestCase):
 
     def test_description(self):
         part = parts.Part()
-        self.assertEqual(True, isinstance(part.description(), str))
+        self.assertTrue(isinstance(part.description(), str))
 
     def test_description_len(self):
         part = parts.Part()
@@ -48,21 +48,42 @@ class BOMTest(unittest.TestCase):
         re = r'^[0-9]{8}$'
         self.assertRegex(bom.number(), re)
 
+    def test_bom_4_digit_format(self):
+        bom = parts.BOM()
+        re = r'^[0-9]{4}$'
+        self.assertRegex(bom.number(style='####'), re)
+
+    def test_bom_style_3(self):
+        bom = parts.BOM()
+        re = r'^[A-Z]{2}[0-9]{2}$'
+        self.assertRegex(bom.number(style='AA##'), re)
+
     def test_bom_components(self):
         bom = parts.BOM(number_of_parts=1)
         self.assertEqual(1, len(bom.components()))
 
     def test_bom_components_type(self):
         bom = parts.BOM(number_of_parts=1)
-        self.assertEqual('Stuff', bom.components())
+        re = r'^[0-9]{8}$'
+        self.assertRegex(bom.components()[0], re)
+
+    def test_part_num_style_2(self):
+        part = parts.Part()
+        re = r'^[0-9]{7}$'
+        self.assertRegex(part.number(style='#######'), re)
 
     def test_bom_components_55(self):
         bom = parts.BOM(number_of_parts=55)
         self.assertEqual(55, len(bom.components()))
 
-    # def test_bom_components_type_55(self):
-    #     bom = parts.BOM(number_of_parts=55)
-    #     self.assertEqual('Stuff', bom.components())
+    def test_bom_components_type_55(self):
+        bom = parts.BOM(number_of_parts=55)
+        re = r'^[0-9]{8}$'
+        self.assertRegex(bom.components()[-1], re)
+
+    def test_bom_name(self):
+        bom = parts.BOM()
+        self.assertTrue(isinstance(bom.name(), str))
 
 
 if __name__ == '__main__':
