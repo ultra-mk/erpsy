@@ -8,12 +8,6 @@ class Part(object):
         pass
 
     def number(self, style=None):
-        """
-        Returns a part number in a user specifed style.
-        If no style is given, an 8 digit part number will be returned.
-        Example formats: '#' will return a digit 'A' will return a letter. 
-        Any other character will return that character.
-        """
         if not style:
             return str(rdm.randint(10000000, 99999999))
         else:
@@ -47,6 +41,10 @@ class Part(object):
 
         return '{0} {1}'.format(rdm.choice(descriptions), rdm.choice(descriptions))
 
+    def uom(self):
+        uoms = ('Each', 'Batch', 'Case', 'Unit')
+        return rdm.choice(uoms)
+
     def _number_style(self, style):
         style = list(style)
         return ''.join([rdm.choice(digits) if i == '#' else rdm.choice(ascii_uppercase) if i == 'A' else i for i in style])
@@ -54,14 +52,18 @@ class Part(object):
 
 class BOM(Part):
 
-    def __init__(self, number_of_parts=0):
+    def __init__(self, number_of_parts=0, depth=1):
         self.number_of_parts = number_of_parts
+        self.depth = depth
 
     def number(self, style=None):
         return Part.number(self, style)
 
     def components(self, style=None):
-        return [Part.number(style) for i in range(0, self.number_of_parts)]
+        return [{'PN': Part.number(style), 'Name': Part.name(self),
+                 'Desc': Part.description(self), 'Level': rdm.choice(range(1, self.depth + 1)),
+                 'QTY': rdm.choice(range(1, 9))}
+                for i in range(0, self.number_of_parts)]
 
     def name(self):
         nouns = ('Gentech', 'McCoy', 'Test', 'Motor')
