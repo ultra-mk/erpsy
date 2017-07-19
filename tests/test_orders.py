@@ -1,5 +1,5 @@
 import unittest
-import orders
+from erpsy import orders
 
 RE = {'default': r'^[0-9]{8}$'}
 

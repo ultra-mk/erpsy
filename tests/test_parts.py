@@ -1,5 +1,5 @@
 import unittest
-import parts
+from erpsy import parts
 
 RE = {'default': r'^[0-9]{8}$',
       '1': r'^[0-9]{4}$',
