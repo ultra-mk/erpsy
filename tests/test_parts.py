@@ -1,10 +1,6 @@
 import unittest
 from erpsy import parts
-
-RE = {'default': r'^[0-9]{8}$',
-      '1': r'^[0-9]{4}$',
-      '2': r'^[0-9]{7}$',
-      '3': r'^[A-Z]{2}[0-9]{2}$'}
+from tests.utils import RE
 
 
 class PartsTest(unittest.TestCase):
@@ -13,13 +9,13 @@ class PartsTest(unittest.TestCase):
         self.assertRegex(parts.number(), RE['default'])
 
     def test_part_num_style_1(self):
-        self.assertRegex(parts.number(style='####'), RE['1'])
+        self.assertRegex(parts.number(style='####'), RE[1])
 
     def test_part_num_style_2(self):
-        self.assertRegex(parts.number(style='#######'), RE['2'])
+        self.assertRegex(parts.number(style='#######'), RE[2])
 
     def test_part_num_style_3(self):
-        self.assertRegex(parts.number(style='AA##'), RE['3'])
+        self.assertRegex(parts.number(style='AA##'), RE[3])
 
     def test_str_types(self):
         properties = [parts.name(), parts.description(), parts.uom(),
