@@ -20,5 +20,15 @@ class OrdersTest(unittest.TestCase):
         self.assertRegex(orders.order(part_style='AA##')
                          ['Order Lines'][0]['PN'], RE[3])
 
+    def test_orders_diff_styles(self):
+        data = orders.order(header_style='AA##', part_style='####')
+        self.assertRegex(data['Order Header'], RE[3])
+        self.assertRegex(data['Order Lines'][0]['PN'], RE[1])
+
+    def test_order_length(self):
+        data = orders.order(line_count=3)
+        self.assertEqual(3, len(data['Order Lines']))
+
+
 if __name__ == '__main__':
     unittest.main()
