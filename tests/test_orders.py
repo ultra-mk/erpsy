@@ -1,5 +1,6 @@
 import unittest
 from erpsy import orders
+from erpsy import words
 from tests.utils import RE
 
 
@@ -29,14 +30,17 @@ class OrdersTest(unittest.TestCase):
         data = orders.order(line_count=3)
         self.assertEqual(3, len(data['Order Lines']))
 
-    def test_order_terms(self):
-        self.assertRegex(orders._terms(), RE['INCOTERMS'])
+    def test_order_inco_terms(self):
+        self.assertRegex(orders._inco_terms(), RE['INCOTERMS'])
 
     def test_order_currency(self):
         self.assertRegex(orders._currency(), RE['INCOTERMS'])
 
     def test_order_currency_default(self):
         self.assertEqual('USD', orders._currency(default='USD'))
+
+    def test_order_payment_terms(self):
+        self.assertIn(orders._payment_terms(), words.PAYMENT)
 
 if __name__ == '__main__':
     unittest.main()

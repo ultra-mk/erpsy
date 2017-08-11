@@ -12,12 +12,19 @@ def _lines(line_count=1, part_style=None):
     return[{'PN': number(part_style)} for i in range(0, line_count)]
 
 
-def _terms():
+def _inco_terms():
     return rdm.choice(words.INCOTERMS)
 
 
 def _currency(default=None):
     if default == None:
         return rdm.choice(words.CURRENCY)
+    else:
+        return default
+
+
+def _payment_terms(default=None):
+    if default == None:
+        return rdm.choice(words.PAYMENT)
     else:
         return default

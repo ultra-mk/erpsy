@@ -29,3 +29,5 @@ UOMS = ('Each', 'Batch', 'Case', 'Unit')
 INCOTERMS = ('EXW', 'FCA', 'CPT', 'CIP', 'DAP', 'DAT', 'FOB', 'CIF')
 
 CURRENCY = ('USD', 'EUR', 'BRL', 'BZD', 'INR', 'MXN', 'CDN')
+
+PAYMENT = ('Net 30', 'Net 60', 'Net 10')
