@@ -1,4 +1,6 @@
 from erpsy.parts import number
+from erpsy import words
+import random as rdm
 
 
 def order(header_style=None, line_count=1, part_style=None):
@@ -8,3 +10,14 @@ def order(header_style=None, line_count=1, part_style=None):
 
 def _lines(line_count=1, part_style=None):
     return[{'PN': number(part_style)} for i in range(0, line_count)]
+
+
+def _terms():
+    return rdm.choice(words.INCOTERMS)
+
+
+def _currency(default=None):
+    if default == None:
+        return rdm.choice(words.CURRENCY)
+    else:
+        return default

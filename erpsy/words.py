@@ -25,3 +25,7 @@ DESCRIPTIONS = ('FLIP-FLOP, 2 CIRCUITS', 'Logic IC Case Style',
                 'StarkVision', 'J-RICE', 'Starsky')
 
 UOMS = ('Each', 'Batch', 'Case', 'Unit')
+
+INCOTERMS = ('EXW', 'FCA', 'CPT', 'CIP', 'DAP', 'DAT', 'FOB', 'CIF')
+
+CURRENCY = ('USD', 'EUR', 'BRL', 'BZD', 'INR', 'MXN', 'CDN')
