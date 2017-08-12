@@ -3,28 +3,14 @@ from erpsy import words
 import random as rdm
 
 
-def order(header_style=None, line_count=1, part_style=None):
-    return {'Order Header': number(header_style),
-            'Order Lines': _lines(line_count, part_style)}
+def order(header_style=None, line_count=1):
+    order = {'order number': number(header_style), 'incoterms': rdm.choice(words.INCOTERMS),
+             'currency': rdm.choice(words.CURRENCY), 'payment terms': rdm.choice(words.PAYMENT)}
+    order['lines'] = lines(line_count)
+    return order
 
 
-def _lines(line_count=1, part_style=None):
-    return[{'PN': number(part_style)} for i in range(0, line_count)]
-
-
-def _inco_terms():
-    return rdm.choice(words.INCOTERMS)
-
-
-def _currency(default=None):
-    if default == None:
-        return rdm.choice(words.CURRENCY)
-    else:
-        return default
-
-
-def _payment_terms(default=None):
-    if default == None:
-        return rdm.choice(words.PAYMENT)
-    else:
-        return default
+def lines(line_count=1, part_style=None):
+    return[{'part number': number(part_style), 'quantity': rdm.randint(1, 50),
+            'price': rdm.uniform(2.5, 250.0)}
+           for i in range(0, line_count)]
